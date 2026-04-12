@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Register() {
+export default function Footer() {
   return (
     <div>
-      Register
+      Footer
     </div>
   )
 }
