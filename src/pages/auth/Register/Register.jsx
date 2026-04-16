@@ -14,10 +14,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const [passwordHide, setpasswordHide] = useState(true);
   const [rePasswordHide, setrePasswordHide] = useState(true);
   const [apiError, setapiError] = useState(false);
-  const navigate = useNavigate();
+  const [isDisabled, setisDisabled] = useState(false);
 
   const form = useForm({
     defaultValues: {
@@ -35,7 +36,7 @@ export default function Register() {
 
   async function mySubmit(values) {
     console.log(values);
-
+    setisDisabled(true);
     try {
       const res = await axios.post(
         `https://route-posts.routemisr.com/users/signup`,
@@ -44,6 +45,7 @@ export default function Register() {
       const { data } = res;
       if (data.success) {
         toast.success(data.message, { position: "top-center", duration: 2000 });
+        setisDisabled(false);
         setTimeout(() => {
           navigate("/login");
         }, 2000);
@@ -52,6 +54,7 @@ export default function Register() {
       console.log(err);
 
       setapiError(err.response?.data.message);
+      setisDisabled(false);
     }
   }
 
@@ -165,13 +168,13 @@ export default function Register() {
         )}
         <div className="my-4 flex gap-4 items-center">
           <div className="flex items-center gap-2">
-            <label className="font-bold" htmlFor="male">
+            <label className="font-bold" htmlFor="date">
               Date Of Birth
             </label>
             <input
               {...register("dateOfBirth")}
               type="date"
-              id="male"
+              id="date"
               className="accent-[#a044ff]"
             />
           </div>
@@ -210,7 +213,7 @@ export default function Register() {
           </p>
         )}
 
-        <AuthButton text="Create My Account" />
+        <AuthButton text="Create My Account" status={isDisabled} />
       </div>
     </form>
   );
