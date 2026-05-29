@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Field, FieldError, FieldLabel } from "../../../components/ui/field";
-import { Input } from "../../../components/ui/input";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import AuthHeader from "../../../components/AuthHeader/AuthHeader";
