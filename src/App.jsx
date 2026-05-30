@@ -9,16 +9,46 @@ import Register from "./pages/auth/Register/Register";
 import toast, { Toaster } from "react-hot-toast";
 import { HeroUIProvider } from "@heroui/react";
 import AuthContextProvider from "./Context/AuthContext";
+import ProtectedAuth from "./components/Protected/ProtectedAuth";
+import ProtectedRoute from "./components/Protected/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "",
     element: <Layout />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "profile", element: <Profile /> },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
+      {
+        index: true,
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "login",
+        element: (
+          <ProtectedAuth>
+            <Login />
+          </ProtectedAuth>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <ProtectedAuth>
+            <Register />
+          </ProtectedAuth>
+        ),
+      },
       { path: "*", element: <NotFound /> },
     ],
   },

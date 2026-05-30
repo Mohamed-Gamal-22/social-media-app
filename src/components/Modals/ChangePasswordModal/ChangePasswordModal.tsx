@@ -12,9 +12,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { changePasswordSchema } from "./../../schemas/auth.schema";
+import { changePasswordSchema } from "../../../schemas/auth.schema";
 import axios from "axios";
-import { AuthContext } from "../../Context/AuthContext";
+import { AuthContext } from "../../../Context/AuthContext";
 import toast from "react-hot-toast";
 
 export default function ChangePasswordModal() {

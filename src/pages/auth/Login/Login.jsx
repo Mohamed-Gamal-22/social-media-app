@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-import AuthHeader from "../../../components/AuthHeader/AuthHeader";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LoginSchema } from "../../../schemas/auth.schema";
-import AuthButton from "./../../../components/AuthButton/AuthButton";
 import { AuthContext } from "../../../Context/AuthContext";
+import AuthButton from "../../../components/Auth/AuthButton/AuthButton";
+import AuthHeader from '../../../components/Auth/AuthHeader/AuthHeader';
 
 export default function Login() {
   const navigate = useNavigate();

@@ -5,11 +5,8 @@ import { IoBookmarks } from "react-icons/io5";
 import { IoMdPeople } from "react-icons/io";
 import { RiLockPasswordFill } from "react-icons/ri";
 import axios from "axios";
-import ChangePasswordModal from "../../components/ChangePasswordModal/ChangePasswordModal";
-
+import ChangePasswordModal from "./../../components/Modals/ChangePasswordModal/ChangePasswordModal";
 export default function Profile() {
-
-
   return (
     <div className="flex flex-wrap min-h-screen bg-red-300 p-4">
       <div className="w-1/5 p-4 bg-slate-200">
