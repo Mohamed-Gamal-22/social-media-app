@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {  useForm } from "react-hook-form";
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
@@ -8,13 +8,15 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LoginSchema } from "../../../schemas/auth.schema";
-import AuthButton from './../../../components/AuthButton/AuthButton';
+import AuthButton from "./../../../components/AuthButton/AuthButton";
+import { AuthContext } from "../../../Context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
   const [passwordHide, setpasswordHide] = useState(true);
   const [apiError, setapiError] = useState(false);
   const [isDisabled, setisDisabled] = useState(false);
+  const { setUserToken } = useContext(AuthContext);
 
   const form = useForm({
     defaultValues: {
@@ -37,6 +39,10 @@ export default function Login() {
       const { data } = res;
       if (data.success) {
         toast.success(data.message, { position: "top-center", duration: 2000 });
+        console.log(data);
+        
+        localStorage.setItem("userToken", data.data.token);
+        setUserToken(data.data.token);
         setisDisabled(false);
         setTimeout(() => {
           navigate("/");

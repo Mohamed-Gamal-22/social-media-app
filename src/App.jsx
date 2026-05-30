@@ -7,6 +7,8 @@ import NotFound from "./pages/NotFound/NotFound";
 import Login from "./pages/auth/Login/Login";
 import Register from "./pages/auth/Register/Register";
 import toast, { Toaster } from "react-hot-toast";
+import { HeroUIProvider } from "@heroui/react";
+import AuthContextProvider from "./Context/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +27,12 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
-      <Toaster />
+      <AuthContextProvider>
+        <HeroUIProvider>
+          <RouterProvider router={router}></RouterProvider>
+          <Toaster />
+        </HeroUIProvider>
+      </AuthContextProvider>
     </>
   );
 }

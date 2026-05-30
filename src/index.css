@@ -8,6 +8,10 @@
   background-image: linear-gradient(to right, #6a3093, #a044ff);
 }
 
+.border-main{
+  border: 3px #6a3093 solid;
+}
+
 h1,
 h2,
 h3,
