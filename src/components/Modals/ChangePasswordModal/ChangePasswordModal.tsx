@@ -25,6 +25,7 @@ export default function ChangePasswordModal() {
   const [currentPassHide, setCurrentPassHide] = useState(true);
   const [newPassHide, setNewPassHide] = useState(true);
   const { userToken, setUserToken } = useContext(AuthContext);
+  const [errMsg, seterrMsg] = useState(null);
 
   const form = useForm({
     defaultValues: { password: "", newPassword: "" },
@@ -33,7 +34,10 @@ export default function ChangePasswordModal() {
 
   const { formState, handleSubmit, register, reset } = form;
 
-  async function changePassword(values) {
+  async function changePassword(values: {
+    password: string;
+    newPassword: string;
+  }) {
     console.log("Data", values);
     console.log("token", localStorage.getItem("userToken"));
 
@@ -43,7 +47,6 @@ export default function ChangePasswordModal() {
         values,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("userToken")}`,
           },
         },
@@ -59,8 +62,11 @@ export default function ChangePasswordModal() {
       } else {
         toast.error(data.message, { position: "top-center", duration: 2000 });
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.log(err);
+      if (err instanceof Error) {
+        seterrMsg(err.response.data.message);
+      }
     }
   }
 
@@ -81,7 +87,11 @@ export default function ChangePasswordModal() {
               <ModalHeader className="flex flex-col gap-1">
                 Change Password
               </ModalHeader>
-
+              {errMsg && (
+                <p className="text-sm text-red-500 my-2 text-center font-bold capitalize">
+                  {errMsg}
+                </p>
+              )}
               <ModalBody>
                 {/* ───── Current Password ───── */}
                 <div className="relative">
